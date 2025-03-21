@@ -1,38 +1,259 @@
+/* App.css */
+@import url('https://fonts.cdnfonts.com/css/chess-merida');
+
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f0f0;
+  min-height: 100vh;
+  padding: 20px;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  background-color: #2c2c2c;
+  padding: 20px;
   color: white;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.App-link {
+.App-header h1 {
+  margin: 0;
+  font-size: 2.2rem;
+  letter-spacing: 1px;
+}
+
+.App-header p {
+  margin: 10px 0 0;
+  font-size: 1.1rem;
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.game-container {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.chessboard-container {
+  flex: 1;
+  max-width: 560px;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+button {
+  margin-top: 20px;
+  padding: 12px 25px;
+  font-size: 1rem;
+  background-color: #61dafb;
+  color: #2c2c2c;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #21a1f1;
+  transform: translateY(-2px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Chess move history with icons */
+.move-history {
+  flex: 1;
+  max-width: 300px;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Chess Merida', sans-serif;
+}
+
+.move-history h3 {
+  margin: 0 0 15px 0;
+  color: #2c2c2c;
+  font-size: 1.3rem;
+  font-family: 'Arial', sans-serif;
+}
+
+.move-list {
+  display: grid;
+  grid-template-columns: auto 1fr 1fr;
+  gap: 8px 15px;
+  font-size: 1.1rem;
+}
+
+.move-pair {
+  display: contents;
+}
+
+.move-number {
+  color: #666;
+  font-weight: 500;
+  text-align: right;
+  font-family: 'Arial', sans-serif;
+}
+
+.white-move,
+.black-move {
+  padding: 4px 8px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  position: relative;
+}
+
+.white-move:hover,
+.black-move:hover {
+  background: #f0f0f0;
+}
+
+/* Chess piece icons using Unicode */
+.move-history .white-move::before,
+.move-history .black-move::before {
+  font-family: 'Chess Merida', sans-serif;
+  margin-right: 5px;
+}
+
+/* White pieces */
+.move-history .white.K::before { content: '\2654'; }
+.move-history .white.Q::before { content: '\2655'; }
+.move-history .white.R::before { content: '\2656'; }
+.move-history .white.B::before { content: '\2657'; }
+.move-history .white.N::before { content: '\2658'; }
+.move-history .white.P::before { content: '\2659'; }
+
+/* Black pieces */
+.move-history .black.K::before { content: '\265A'; }
+.move-history .black.Q::before { content: '\265B'; }
+.move-history .black.R::before { content: '\265C'; }
+.move-history .black.B::before { content: '\265D'; }
+.move-history .black.N::before { content: '\265E'; }
+.move-history .black.P::before { content: '\265F'; }
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .game-container {
+    flex-direction: column;
+    align-items: center;
   }
-  to {
-    transform: rotate(360deg);
+  
+  .chessboard-container {
+    width: 100%;
+    max-width: 400px;
   }
+  
+  .move-history {
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .move-list {
+    grid-template-columns: 40px 1fr 1fr;
+  }
+}
+
+/* Game result banner */
+.game-result-banner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.95);
+  padding: 25px 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  z-index: 1000;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #2c2c2c;
+}
+
+.play-again-btn {
+  display: block;
+  margin: 15px auto 0;
+  padding: 10px 25px;
+  font-size: 1rem;
+  background: #21a1f1;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.play-again-btn:hover {
+  background: #1a7bb9;
+  transform: translateY(-2px);
+}
+
+.reset-btn {
+  margin-top: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Game Controls */
+.game-controls {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.game-controls button {
+  padding: 8px 15px;
+  font-size: 0.9rem;
+  background: #f0f0f0;
+  color: #2c2c2c;
+  border: 1px solid #ddd;
+}
+
+.game-controls button:hover {
+  background: #e0e0e0;
+}
+
+/* Confirmation Modals */
+.confirmation-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  z-index: 1001;
+}
+
+.confirmation-modal p {
+  margin: 0 0 20px 0;
+  font-size: 1.1rem;
+}
+
+.confirmation-modal button {
+  margin: 0 10px;
+  padding: 8px 20px;
+  font-size: 0.9rem;
+}
+
+/* Dim background when modal is open */
+.confirmation-modal::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: -1;
 }

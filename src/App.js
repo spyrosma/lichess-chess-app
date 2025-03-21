@@ -1,23 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import ChessGame from './ChessGame';
+import './App.css'; // Import the CSS file
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Lichess Chess Game</h1>
+        <p>Play chess using Lichess's open-source platform!</p>
       </header>
+      <main className="main-container">
+        <ChessGame />
+      </main>
     </div>
   );
 }
